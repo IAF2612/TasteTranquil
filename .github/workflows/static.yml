@@ -1,0 +1,34 @@
+name: Deploy Static Site to GitHub Pages
+
+on:
+  push:
+    branches: [ "main" ]  # EDIT: Change branch if not 'main' (e.g., 'master')
+  workflow_dispatch:      # Optional: Allows manual triggers in GitHub UI
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+
+    steps:
+      # 1. CHECKOUT - No edits needed
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. (OPTIONAL) BUILD STEP - Uncomment if you need builds
+      # - name: Install and build
+      #   run: |
+      #     npm install
+      #     npm run build  # EDIT: Replace with your build command (e.g., 'vite build')
+
+      # 3. UPLOAD ARTIFACT - EDIT path if not 'dist/'
+      - name: Upload to GitHub Pages
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: 'dist/'  # EDIT: Change to 'build/' for React, or '.' for root
+
+      # 4. DEPLOY - No edits needed
+      - name: Deploy
+        uses: actions/deploy-pages@v2
