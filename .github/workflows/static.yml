@@ -3,7 +3,6 @@ name: Deploy Static Site to GitHub Pages
 on:
   push:
     branches: [ "main" ]  # EDIT: Change branch if not 'main' (e.g., 'master')
-  workflow_dispatch:      # Optional: Allows manual triggers in GitHub UI
 
 jobs:
   deploy:
